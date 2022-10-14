@@ -8,9 +8,7 @@ import javax.persistence.EntityNotFoundException
 @ControllerAdvice
 class TaskExceptionHandler {
     @ExceptionHandler(EntityNotFoundException::class, IllegalArgumentException::class)
-    fun handle(e: Exception): ResponseEntity<*> {
-        return ResponseEntity.badRequest().body<Error>(Error(e.message))
-    }
+    fun handle(e: Exception): ResponseEntity<*> = ResponseEntity.badRequest().body<Error>(Error(e.message))
 
     private data class Error(
         val error: String?
