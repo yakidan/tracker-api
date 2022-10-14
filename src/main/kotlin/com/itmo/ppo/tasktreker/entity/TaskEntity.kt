@@ -1,6 +1,6 @@
 package com.itmo.ppo.tasktreker.entity
 
-import java.util.*
+import java.util.UUID
 import javax.persistence.*
 
 @Entity

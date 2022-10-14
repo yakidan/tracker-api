@@ -3,7 +3,8 @@ package com.itmo.ppo.tasktreker.controller
 import com.itmo.ppo.tasktreker.model.Task
 import com.itmo.ppo.tasktreker.service.TaskService
 import org.springframework.web.bind.annotation.*
-import java.util.*
+import java.util.UUID
+
 
 @RestController
 @RequestMapping("/api/v1/tasks")

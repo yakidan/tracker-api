@@ -18,18 +18,17 @@ class TaskService(
 ) {
     @Transactional(readOnly = true)
     fun getTasks(limit: Int): List<Task> {
-        return taskRepository.findAll(Pageable.ofSize(limit)).map { mapper.entityToModel(it) }.toList()
+        return taskRepository.findAll(Pageable.ofSize(limit)).map(mapper::entityToModel).toList()
     }
 
     @Transactional(readOnly = true)
     fun getTask(id: UUID): Task? {
-        val task = mapper.entityToModel(
+        return mapper.entityToModel(
             taskRepository.findById(id)
                 .orElseThrow {
                     EntityNotFoundException("Task with id $id is not found")
                 }
         )
-        return task
     }
 
     @Transactional
@@ -39,12 +38,10 @@ class TaskService(
 
     @Transactional
     fun updateTask(task: Task): Task? {
-        if (task.id == null) {
-            throw IllegalArgumentException("ID was is not null")
-        }
+        requireNotNull(task.id)
         val entity = taskRepository.findById(task.id)
             .orElseThrow {
-                EntityNotFoundException("Task with id = ${task.id} was not found")
+                EntityNotFoundException("Task with id = ${task.id} not found")
             }
         entity.name = task.name
         entity.description = task.description
