@@ -1,0 +1,73 @@
+databaseChangeLog:
+  - changeSet:
+      id: uuid-ossp_plugin
+      author: stasyan
+      changes:
+        - sql:
+            sql: create extension if not exists "uuid-ossp" schema public;
+  - changeSet:
+      id: create_task_status_table
+      author: stasyan
+      changes:
+        - createTable:
+            tableName: task_status
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                  defaultValue: public.uuid_generate_v4()
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+  - changeSet:
+      id: create_task_table
+      author: stasyan
+      changes:
+        - createTable:
+            tableName: task
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: description
+                  type: VARCHAR(255)
+              - column:
+                  name: status_id
+                  type: UUID
+                  constraints:
+                    foreignKeyName: fk_task_status
+                    references: task_status(id)
+  - changeSet:
+      id: init_task_status_table
+      author: stasyan
+      changes:
+        - insert:
+            tableName: task_status
+            columns:
+              - column:
+                  name: name
+                  value: "TO_DO"
+        - insert:
+            tableName: task_status
+            columns:
+              - column:
+                  name: name
+                  value: "IN_PROGRESS"
+        - insert:
+            tableName: task_status
+            columns:
+              - column:
+                  name: name
+                  value: "DONE"

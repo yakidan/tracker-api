@@ -1,15 +1,14 @@
 package com.itmo.ppo.tasktreker.entity
 
+import java.util.*
 import javax.persistence.*
 
 @Entity
-@Table(name = "tasks")
-class TaskEntity(
-
-) {
+@Table(name = "task")
+class TaskEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    var id: Int? = null
+    @GeneratedValue
+    var id: UUID? = null
 
     @Column(name = "name")
     var name: String? = null

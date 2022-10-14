@@ -1,15 +1,17 @@
 package com.itmo.ppo.tasktreker.entity
 
-import javax.persistence.*
+import java.util.*
+import javax.persistence.Column
+import javax.persistence.Entity
+import javax.persistence.Id
+import javax.persistence.Table
 
 @Entity
-@Table(name = "status")
+@Table(name = "task_status")
 class TaskStatus {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    var id: Int? = null
+    var id: UUID? = null
 
     @Column(name = "name")
     var name: String? = null
-
 }
