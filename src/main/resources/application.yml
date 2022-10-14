@@ -1,0 +1,7 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/db_tracker?currentSchema=task_schema
+    username: postgres
+    password: postgres
+  liquibase:
+    change-log: classpath:db.changelog/changelog-master.yml
